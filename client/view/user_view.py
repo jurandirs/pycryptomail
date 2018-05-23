@@ -1,4 +1,5 @@
-from connection import autentication
+from communication.connection import Connection
+
 
 class Application:
     def __init__(self):
@@ -10,7 +11,6 @@ class Application:
         :return:None
         '''
         pass
-
 
     def print_menu_login(self):
         '''
@@ -25,6 +25,14 @@ class Application:
         :return: None
         '''
         pass
+
+    def send_email(self):
+        '''
+        Class to send emails
+        :return: None
+        '''
+        pass
+
 
 if __name__ == "__main__":
     Application()
