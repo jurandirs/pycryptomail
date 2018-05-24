@@ -1,6 +1,15 @@
 # pycryptomail
-E-mail Client safe
+                           _       __                        _ __
+    ____  __  ____________(_____  / /_____  ____ ___  ____ _(_/ /
+   / __ \/ / / / ___/ ___/ / __ \/ __/ __ \/ __ `__ \/ __ `/ / /
+  / /_/ / /_/ / /__/ /  / / /_/ / /_/ /_/ / / / / / / /_/ / / /
+ / .___/\__, /\___/_/  /_/ .___/\__/\____/_/ /_/ /_/\__,_/_/_/
+/_/    /____/           /_/
 
-Requirements:
+SAFE E-mail Client
 
-pycrypto 2.6.1 : pip install pycrypto
+Dependences:
+
+pycrypto 2.6.1
+
+install: pip install pycrypto

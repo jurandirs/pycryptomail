@@ -1,4 +1,4 @@
-from conf.configuration import Configuration
+from client.conf.configuration import Configuration
 from encrypt import EncryptEmail
 import socket
 
