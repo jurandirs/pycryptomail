@@ -1,9 +1,11 @@
 import hashlib
-from threading import Thread
+import socket
 from Crypto.PublicKey import RSA
 from Crypto.Util.randpool import RandomPool
 
 list_of_users = {'jura': 'bla'}
+Host = 'localhost'
+port = 6655
 
 
 class Encrypt:
@@ -46,14 +48,30 @@ class Encrypt:
         msg_decrypted = self.private_key.decrypt(message)
         return msg_decrypted
 
+    def generate_token_for_client(self, email_client):
+        pass
 
-class Connection(Thread):
+    def verify_user_token(self, token_received):
+        pass
+
+
+class Connection:
     def __init__(self):
-        super(Connection, self).__init__()
+        self.encryption = Encrypt()
+        self.encryption.generate_key()
 
     def run(self):
-        pass
+        server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        server_sock.bind(('0.0.0.0', 6565))
+        server_sock.listen(100)
+        while True:
+            (cli_socket, address) = server_sock.accept()
+            if cli_socket.send('ok' + '\n') == 0:
+                print "Client connection is broken"
+                cli_socket.close()
+
 
 
 if __name__ == "__main__":
     con = Connection()
+    con.run()

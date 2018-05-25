@@ -25,7 +25,7 @@ class EmailController:
 
     def request_user_key(self, e_from):
         msg_builder = Message()
-        msg = msg_builder.msg_get_client_key(e_from)
+        msg = msg_builder.msg_get_client_key(e_from, self.user.user_token)
 
     def set_email(self, e_from, cc, subject, message, priority = 1):
         email = EmailBuilder()
@@ -38,7 +38,8 @@ class EmailController:
 
     def build_message(self, email_encrypted):
         msg_builder = Message()
-        msg = msg_builder.msg_email(email_encrypted)
+        msg = msg_builder.msg_email(email_encrypted, self.user.user_token)
+        return msg
 
     def send_message(self, message):
-        pass
+        self.connection.send_message(message)

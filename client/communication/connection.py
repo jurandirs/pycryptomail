@@ -26,4 +26,10 @@ class Connection:
 
 
 if __name__ == "__main__":
-    con = Connection
+    # con = Connection
+    cli_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    cli_socket.connect(('localhost', 6565))
+
+    print cli_socket.recv(255)
+
+    cli_socket.close()
