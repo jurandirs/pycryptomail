@@ -1,4 +1,6 @@
+from oauth2client import client
 from client.controller.autenticate_messages import Authentication
+from user import User
 import getpass
 
 welcome = "                __                             __                                             __                        _ __\n\
@@ -30,6 +32,8 @@ class Application:
         print('EnTEr wlTh Y0uR Credencials:\n')
         email = raw_input('Email:')
         password = getpass.getpass('Password: ')
+        self.user = User(email=email, password=password)
+
 
     def print_get_token(self):
         '''
