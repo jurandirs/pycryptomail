@@ -26,7 +26,7 @@ def show_menu():
 
 if __name__=='__main__':
 	App = Application()
-	user = App.getUser()
+	user = App.get_user()
 	server = ServerSimulator()
 
 	while True:
@@ -34,10 +34,12 @@ if __name__=='__main__':
 		if opc == 'send_message':
 			message = MessageBuilder()
 			message.set_from_email(user.get_email())
-			message.set_from_email(input('To: '))
+			message.set_receiver_email(input('To: '))
 			message.set_subject(input('Subject: '))
 			message.set_msg(input('Message: '))
 			message = message.build()
+			receiver_public_key = server.get_public_key(message['receiver'])
+			App.send_email(message, receiver_public_key)
 
 
 

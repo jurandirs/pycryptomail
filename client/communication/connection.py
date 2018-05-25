@@ -1,5 +1,5 @@
 from client.conf.configuration import Configuration
-from encrypt import EncryptEmail
+from client.communication.encrypt import EncryptEmail
 import socket
 
 
@@ -29,8 +29,8 @@ class Connection:
 
     def send_key(self):
         '''
-        Share public key to sever
-        :param key: Key of cryptography
+        Share public session_key to sever
+        :param session_key: Key of cryptography
         :return: None
         '''
         public_key = self.class_encript.get_public_key()

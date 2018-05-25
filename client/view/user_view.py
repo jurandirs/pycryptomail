@@ -1,5 +1,7 @@
 from oauth2client import client
 from client.controller.autenticate_messages import Authentication
+from client.communication.encrypt import EncryptEmail
+from client.communication.connection import Connection
 from user import User
 import getpass
 
@@ -16,13 +18,10 @@ class Application:
         self.start_connection()
         self.print_welcome_msg()
         self.print_menu_login()
+        self.open_session()
 
     def start_connection(self):
-        '''
-        Establish connection with server
-        :return:None
-        '''
-        pass
+        self.connection = Connection()
 
     def print_menu_login(self):
         '''
@@ -48,12 +47,8 @@ class Application:
         '''
         pass
 
-    def send_email(self):
-        '''
-        Send emails
-        :return: None
-        '''
-        pass
+    def send_email(self,message, receiver_public_key):
+        encrypted_msg, encrypted_session_key = self.encrypt_email.encrypt_msg(message, receiver_public_key)
 
     def print_welcome_msg(self):
         '''
@@ -63,8 +58,11 @@ class Application:
         print(welcome)
         print("######### Send email with security ##########")
 
-    def getUser(self):
+    def get_user(self):
         return self.__user
+
+
+
 
 if __name__ == "__main__":
     Application()
