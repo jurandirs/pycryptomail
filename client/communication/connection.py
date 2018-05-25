@@ -1,26 +1,19 @@
-from client.conf.configuration import Configuration
-from client.communication.encrypt import EncryptEmail
+from client.controller.encrypt import Encrypt
 import socket
 
 
 class Connection:
     def __init__(self):
-        self.host = Configuration.get("CONNECTION", 'ip')
-        self.port = Configuration.get_int("CONNECTION", 'port')
-        self.class_encript = EncryptEmail()
+        self.host = 'localhost'
+        self.port = 6655
+        self.section_encryption = Encrypt()
+        self.section_encryption.generate_key()
 
     def send_message(self, message):
-        '''
-        Connect with sever and
-        :param message: Message not encripted
-        :return: None
-        '''
-        print('Sending Secure Message to sever')
-        message_encrypted = self.class_encript.cryptography_msg(message)
         destination = (self.host, self.port)
         connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         connection.connect(destination)
-        connection.send(message_encrypted)
+        connection.send(message)
         connection.listen(1)
         connection.close()
 
@@ -28,11 +21,9 @@ class Connection:
         pass
 
     def send_key(self):
-        '''
-        Share public session_key to sever
-        :param session_key: Key of cryptography
-        :return: None
-        '''
-        public_key = self.class_encript.get_public_key()
+        public_key = self.section_encryption.get_serialized_public_key()
         self.send_message(public_key)
 
+
+if __name__ == "__main__":
+    con = Connection

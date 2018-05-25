@@ -1,8 +1,6 @@
-from oauth2client import client
-from client.controller.autenticate_messages import Authentication
-from client.communication.encrypt import EncryptEmail
 from client.communication.connection import Connection
-from user import User
+from client.controller.autenticate import Authentication
+from client.controller.email_controller import EmailController
 import getpass
 
 welcome = "                __                             __                                             __                        _ __\n\
@@ -15,53 +13,37 @@ welcome = "                __                             __                    
 
 class Application:
     def __init__(self):
-        self.start_connection()
-        self.print_welcome_msg()
-        self.print_menu_login()
-        self.open_session()
+        self.user = None
+        self.connection = self.start_connection
 
+        self.print_login()
+
+    @property
     def start_connection(self):
-        self.connection = Connection()
+        connection = Connection()
+        return connection
 
-    def print_menu_login(self):
-        '''
-        Print Menu containing login form
-        :return: None
-        '''
-        print('EnTEr wlTh Y0uR Credencials:\n')
-        email = input('Email:')
-        password = getpass.getpass('Password: ')
-        self.__user = User(email=email, password=password)
-
-
-    def print_get_token(self):
-        '''
-        Print messsage to token required:
-        :return: None
-        '''
-
-    def print_emails(self):
-        '''
-        Print emails requested from server
-        :return: None
-        '''
-        pass
-
-    def send_email(self,message, receiver_public_key):
-        encrypted_msg, encrypted_session_key = self.encrypt_email.encrypt_msg(message, receiver_public_key)
-
-    def print_welcome_msg(self):
-        '''
-        Print
-        :return:
-        '''
+    def print_login(self):
         print(welcome)
         print("######### Send email with security ##########")
 
-    def get_user(self):
-        return self.__user
+        auth = Authentication()
+        print('EnTEr wlTh Y0uR Credencials:\n')
+        email = input('Email:')
+        password = getpass.getpass('Password: ')
+        auth.request_authentication(email, password)
 
+    def print_emails(self, list_of_emails):
+        for email in list_of_emails:
+            pass
 
+    def print_write_email(self):
+        email_from = input('From: ')
+        email_cc = input('CC: -- None for nothing')
+        email_subject = input('Subject: ')
+        email_msg = input('Message: ')
+        ec = EmailController(self.user, self.connection)
+        ec.set_email(email_from, email_cc, email_subject, email_msg)
 
 
 if __name__ == "__main__":
