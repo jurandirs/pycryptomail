@@ -6,6 +6,9 @@ class MessageBuilder:
         self.message['from'] = email
         return self
 
+    def set_receiver_email(self, email):
+        self.message['receiver'] = email
+
     def set_cc_emails(self, emails):
         self.message['cc'] = emails
         return self

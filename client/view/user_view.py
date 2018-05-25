@@ -30,9 +30,9 @@ class Application:
         :return: None
         '''
         print('EnTEr wlTh Y0uR Credencials:\n')
-        email = raw_input('Email:')
+        email = input('Email:')
         password = getpass.getpass('Password: ')
-        self.user = User(email=email, password=password)
+        self.__user = User(email=email, password=password)
 
 
     def print_get_token(self):
@@ -63,7 +63,8 @@ class Application:
         print(welcome)
         print("######### Send email with security ##########")
 
-
+    def getUser(self):
+        return self.__user
 
 if __name__ == "__main__":
     Application()

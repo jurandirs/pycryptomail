@@ -79,7 +79,7 @@ if __name__ == '__main__':
     key_pv_client, key_pub_client = e.generate_key()
     client_key = key_pv_client.publickey().exportKey(format='PEM', passphrase=None, pkcs=1)
 
-    # ----------Server -----------------
+    # ----------server -----------------
     key_pv_server, key_pub_server = e.generate_key()
     server_key = key_pv_server.publickey().exportKey(format='PEM', passphrase=None, pkcs=1)
 
@@ -88,7 +88,7 @@ if __name__ == '__main__':
 
     key_rcv_client = RSA.importKey(client_key, passphrase=None)
 
-    # Server encrypt msg with key of client
+    # server encrypt msg with key of client
     msg = key_rcv_client.encrypt("Hello", '')
 
     # Client decrypt msg with private key
