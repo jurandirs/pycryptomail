@@ -1,3 +1,6 @@
+import pickle
+
+
 class Message:
     def __init__(self):
         pass
@@ -10,7 +13,7 @@ class Message:
         body['email']       = email
         msg['body']         = body
 
-        return msg
+        return self.serialize(msg)
 
     def msg_send_key(self, key, token):
         msg                 = {}
@@ -20,7 +23,7 @@ class Message:
         body['token']       = token
         msg['body']         = body
 
-        return msg
+        return self.serialize(msg)
 
     def msg_get_client_key(self, email, token):
         msg                 = {}
@@ -30,7 +33,7 @@ class Message:
         body['email']       = email
         msg['body']         = body
 
-        return msg
+        return self.serialize(msg)
 
     def msg_authentication(self, email, password):
         msg                 = {}
@@ -40,4 +43,10 @@ class Message:
         body['password']    = password
         msg['body']         = body
 
-        return msg
+        return self.serialize(msg)
+
+    def serialize(self, message):
+        return pickle.dumps(message)
+
+    def deserialize(self, message_serialized):
+        return pickle.loads(message_serialized)
